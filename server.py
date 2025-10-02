@@ -13,4 +13,7 @@ if __name__ == "__main__":
 
 
 #paso para activar entorno virtual (venv) venv\Scripts\activate
-
+#para subir cosas a git
+#git add requirements.txt
+#git commit -m "Agregar Gunicorn a requirements.txt"
+#git push origin main
