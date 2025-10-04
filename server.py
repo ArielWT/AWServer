@@ -2,34 +2,19 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# Ruta principal
-@app.route("/")
+@app.route('/')
 def home():
     return "¡Hola! Tu servidor Flask AWServer funciona"
 
-# Ruta para recibir datos de otras apps
-@app.route("/api", methods=["POST"])
+@app.route('/api', methods=['POST'])
 def api():
-    data = request.json  # Espera datos en formato JSON
-    if not data:
-        return jsonify({"error": "No se recibió JSON"}), 400
+    data = request.get_json()
+    print("Recibido en servidor:", data)
+    return jsonify({"respuesta": f"Recibido correctamente: {data}"})
 
-    # Ejemplo: procesar datos y responder
-    mensaje = data.get("mensaje", "No hay mensaje")
-    respuesta = {
-        "mensaje_recibido": mensaje,
-        "status": "OK"
-    }
-    return jsonify(respuesta)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
 
-# Ruta de prueba GET
-@app.route("/status", methods=["GET"])
-def status():
-    return jsonify({"status": "Servidor activo"})
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
 
 
 #1 paso para activar entorno virtual (venv) venv\Scripts\activate
